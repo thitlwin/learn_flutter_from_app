@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:learn_flutter_from_app/AppTheme.dart';
+import 'package:get/get.dart';
+import 'package:learn_flutter_from_app/routes/app_pages.dart';
+import 'package:learn_flutter_from_app/theme/app_text_theme.dart';
+import 'package:learn_flutter_from_app/theme/app_theme.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 void main() {
@@ -9,10 +12,12 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: AppTheme.myTheme,
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+    return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Learn Flutter From App',
+      theme: appThemeData,
+      home: MyHomePage(title: 'Home'),
+      getPages: AppPages.pages,
     );
   }
 }
@@ -82,7 +87,9 @@ class _MyHomePageState extends State<MyHomePage> {
                         Column(
                           children: <Widget>[
                             Text("v. 1.0.0",
-                                style: themeData.textTheme.subtitle2)
+                                style: getTextStyle(
+                                    themeData.textTheme.bodyText1,
+                                    color: themeData.colorScheme.onPrimary))
                           ],
                         ),
                       ],
@@ -95,44 +102,43 @@ class _MyHomePageState extends State<MyHomePage> {
             Expanded(
               flex: 5,
               child: Container(
-                color: themeData.backgroundColor,
+                // color: themeData.backgroundColor,
                 child: Column(
                   children: <Widget>[
                     ListTile(
                       leading: Icon(MdiIcons.materialDesign,
                           color: _selectedPage == 0
                               ? themeData.colorScheme.primary
-                              : themeData.colorScheme.onBackground),
-                      title: Text("Material Widget",
-                          style: AppTheme.getTextStyle(
-                              themeData.textTheme.subtitle2,
+                              : themeData.colorScheme.onSurface),
+                      title: Text("Flutter Layout",
+                          style: getTextStyle(themeData.textTheme.subtitle2,
                               fontWeight: _selectedPage == 0
                                   ? FontWeight.w600
                                   : FontWeight.w500,
                               color: _selectedPage == 0
                                   ? themeData.colorScheme.primary
-                                  : themeData.colorScheme.onBackground)),
+                                  : themeData.colorScheme.onSurface)),
                       onTap: () {
                         setState(() {
                           _selectedPage = 0;
                         });
-                        Navigator.of(context).pop();
+                        // Get.to(FlutterLayoutCourseWidget());
+                        Get.toNamed(Routes.LAYOUT_COURSE_CONTENT);
                       },
                     ),
                     ListTile(
                       leading: Icon(MdiIcons.appleIos,
                           color: _selectedPage == 1
                               ? themeData.colorScheme.primary
-                              : themeData.colorScheme.onBackground),
+                              : themeData.colorScheme.onSurface),
                       title: Text("Cupertino Widget",
-                          style: AppTheme.getTextStyle(
-                              themeData.textTheme.subtitle2,
+                          style: getTextStyle(themeData.textTheme.subtitle2,
                               fontWeight: _selectedPage == 1
                                   ? FontWeight.w600
                                   : FontWeight.w500,
                               color: _selectedPage == 1
                                   ? themeData.colorScheme.primary
-                                  : themeData.colorScheme.onBackground)),
+                                  : themeData.colorScheme.onSurface)),
                       onTap: () {
                         setState(() {
                           _selectedPage = 1;
@@ -145,18 +151,17 @@ class _MyHomePageState extends State<MyHomePage> {
                         MdiIcons.fileMultipleOutline,
                         color: _selectedPage == 2
                             ? themeData.colorScheme.primary
-                            : themeData.colorScheme.onBackground,
+                            : themeData.colorScheme.onSurface,
                         size: 22,
                       ),
                       title: Text("Screens",
-                          style: AppTheme.getTextStyle(
-                              themeData.textTheme.subtitle2,
+                          style: getTextStyle(themeData.textTheme.subtitle2,
                               fontWeight: _selectedPage == 2
                                   ? FontWeight.w600
                                   : FontWeight.w500,
                               color: _selectedPage == 2
                                   ? themeData.colorScheme.primary
-                                  : themeData.colorScheme.onBackground)),
+                                  : themeData.colorScheme.onSurface)),
                       onTap: () {
                         setState(() {
                           _selectedPage = 2;
@@ -176,7 +181,7 @@ class _MyHomePageState extends State<MyHomePage> {
       //   onPressed: _incrementCounter,
       //   tooltip: 'Increment',
       //   child: Icon(Icons.add),
-      // ),
+      // ),w
     );
   }
 }
