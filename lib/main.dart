@@ -5,6 +5,8 @@ import 'package:learn_flutter_from_app/theme/app_text_theme.dart';
 import 'package:learn_flutter_from_app/theme/app_theme.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
+import 'AppTheme.dart';
+
 void main() {
   runApp(MyApp());
 }
